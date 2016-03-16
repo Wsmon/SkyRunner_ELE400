@@ -1,16 +1,36 @@
 # SkyRunner_ELE400
 ETS CableCam Project for Tribor Design
 
-This project is the controller of a cable cam mount.
+This project is a CableCam controller created for Tribor Design
+The project is divided in three modules :
+>Interface;
+>Communication;
+>Controller.
 
-Team
-Samuel Geoffroy-Héroux AKA Captnlink
-Ka hey Chu AKA khchu1993
-Wantel Simon AKA Wsimon
-Antoine 
+###Team Projet
+We are students from ETS in Electrical engineering in ELE400 
 
-Whole Projet
-Alexi Demers
-David Prairie Bourgault
-Danny Arseneau
-Marc-Daniel
+Manager
+>Samuel Geoffroy-Héroux AKA *Captnlink*
+
+Head Engineer - Control
+>Antoine Champoux 
+
+Head Engineer - interface
+>Alexi Demers
+
+Head Engineer - Communication
+>Danny Arseneau
+
+Head Engineer - Power
+>Marc-Daniel
+
+Buyer
+>David Prairie Bourgault
+
+Engineer
+>Ka hey Chu AKA *khchu1993*
+
+>Wantel Simon AKA *Wsimon*
+
+
