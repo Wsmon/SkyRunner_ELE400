@@ -3,7 +3,7 @@
 //Includes
 //Include default configuration
 
-PID_Controller::PID_Controller()
+PidController::PidController()
 {
     dState;
 	iState;
@@ -16,7 +16,7 @@ PID_Controller::PID_Controller()
 }
 
 
-double PID_Controller::Update(double error, double feedback){
+double PidController::UpdatePid(double error, double feedback){
 	double pTerm, dTerm, iTerm;
 
 	//Proportional term

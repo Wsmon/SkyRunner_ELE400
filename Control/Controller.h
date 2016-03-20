@@ -9,20 +9,20 @@
 
 */
 
-#ifndef PID_Controller_H_
-#define PID_Controller_H_
+#ifndef PidController_H_
+#define PidController_H_
 
 /**
-    @class PID_Controller Controller.h
+    @class PidController Controller.h
     @brief PID Controller
 
-    @author Samuel Geoffroy AKA Captnlink
+    @author Captnlink
     @version 1.1
     @date March 20, 2016
 
     This class contain a PID controller with the respective gain for proportional, integral and derivative
 */
-class PID_Controller
+class PidController
 {
 private:
     double  dState; //Last position
@@ -35,10 +35,10 @@ private:
     double  dGain; // Derivative Gain
 
 public:
-    PID_Controller();
+    PidController();
 
     /**
-    @fn Update
+    @fn UpdatePid
     @brief This fonction refresh the output of the controller
     @param error     : setpoint - feedback
     @param feedback  : feedback from machinery
@@ -47,7 +47,7 @@ public:
     The controller use proportional, integral and derivative operation to drive an output
 
     */
-    double Update(double error, double feedback);
+    double UpdatePid(double error, double feedback);
 
     //Setters
     void setpGain(double p){pGain = p;}

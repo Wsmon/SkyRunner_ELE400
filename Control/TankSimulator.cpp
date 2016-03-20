@@ -85,7 +85,7 @@ int main()
     double niveauActuel = 0;
     double valveOpening = 0;
     double consigne = 60;
-    PID_Controller PID;
+    PidController PID;
     PID.setpGain(10);
     PID.setiGain(0.1);
 
@@ -102,7 +102,7 @@ int main()
     while(true)
     {
         i++;
-        valveOpening = PID.Update(consigne - niveauActuel,niveauActuel);
+        valveOpening = PID.UpdatePid(consigne - niveauActuel,niveauActuel);
         if(valveOpening>100)valveOpening=100;
         else if(valveOpening<0)valveOpening=0;
         if(!(i%5))

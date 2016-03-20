@@ -1,0 +1,55 @@
+/**
+    Project : CableCam_Chariot\n
+    @file Nomenclature.txt
+    @brief Nomenclature utilisé dans le projet
+    @author Captnlink
+	
+    @version 1.0
+    @date March 20, 2016
+	
+*/
+
+/*
+Nomenclature des variables et des fonctions.
+Toujours commenter le fonctionnalité de votre déclaration
+const 	: MY_CONSTANTE_SCREAMS
+var		: myVariableGoesOnAndOn
+function and method	: MyMethodIsNice
+
+Variables
+	Première lettre en minuscule
+	
+Pointeurs
+	les pointeurs est précédé de la lettre 'p'
+	placé '*' près du type
+	
+ Noms de Class et Method
+    Lettre majuscule comme séparateur de mots, minuscule pour le restant
+    Première lettre en majuscule
+    Pas de underscore ('_') 
+
+	Nommé vos class avec des noms commun.
+	les fonctions et méthodes avec des verbes d'actions.
+	
+	Les variable privé d'une classe est précédé de la lettre 'm'
+	les paramètres de méthode est preécédé de la lettre 'q'
+
+Typedef
+	Ajouter Type à la fin.
+
+Enum et defines
+	Tout en majuscule et les mots séparé par '_'
+		
+Utilisation de préfix
+	Is - quand vous «poser» une question, retourne vrai ou faux
+	Get - retourne une valeur
+	Set - change une valeur
+
+Utilisation de suffix
+    Max - La valeur maximal que tu peux atteindre.
+    Cnt - le nombre courant d'essai (count) actuel.
+
+Par exemple: RetryMax veut dire le nombre maximum de Retry possible, 
+	RetryCnt le nombre actuel de Retry. 
+
+*/
