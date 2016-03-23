@@ -1,7 +1,7 @@
 /**
     Project : CableCam_Chariot\n
     @file Thermistance.h
-    @brief R�cup�re la temp�rature de la thermistance
+    @brief Recupere la temperature de la thermistance
 
     @author Captnlink
 	
@@ -40,12 +40,11 @@
     @brief Permet l'acquisition d'une valeur de temperature
 
     @author Captnlink
-	@author Lady Ada
 	
     @version 1.1
     @date March 20, 2016
 
-
+	La librairie a ete originalement cree par Lady Ada
 */
 class Thermistance
 {
@@ -65,8 +64,8 @@ public:
 	
     /**
     @fn GetTempratureCelsius
-    @brief R�cup�re la temp�rature en �C
-    @return double Temperature �C
+    @brief Recupere la temperature en degree C
+    @return double Temperature degree C
     */
 	double GetTempratureCelsius();
 
