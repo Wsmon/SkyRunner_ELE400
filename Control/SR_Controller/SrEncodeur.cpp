@@ -3,15 +3,22 @@
 SrEncodeur::SrEncodeur()
 {
     mOldPosition = -999;
-    mVitesseArray[10] = {0}
+    mVitesseArray[10] = {0};
+    mPositionCm = 0;
+    mVitesseMoy = 0;
+    mDirecttion = 0;
 }
 
 void SrEncodeur::Update(){
 
     long newPosition = EncodeurMecanique.read();
 
-    //Calcul de position actuel en cm
+    //Calcul de la direction
+    if(newPosition > oldPosition)       mDirecttion = DIRECTION_AVANT;
+    else if(newPosition < oldPosition)  mDirecttion = DIRECTION_ARRIERE;
+    else (newPosition == oldPosition)   mDirecttion = DIRECTION_NULL;
 
+    //Calcul de position actuel en cm
     mPositionCm = 3.75 * newPosition * (2 * 3.1415 * RAYONCM / 360); /*3.75 est la convertion de 96 pulses a 360 degrees*/
 
     //Calcul de vitesse

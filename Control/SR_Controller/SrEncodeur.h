@@ -19,6 +19,10 @@
 #define SAMPLEVITESSE 10
 #define RAYONCM 5
 
+#define DIRECTION_ARRIERE   -1
+#define DIRECTION_AVANT     1
+#define DIRECTION_NULL    0
+
 class SrEncodeur
 {
     public:
@@ -30,15 +34,9 @@ class SrEncodeur
          */
         void Update();
 
-        /** Access PositionCm
-         * @return The current value of PositionCm
-         */
         int GetPositionCm() { return PositionCm; }
-
-        /** Access Vitesse
-         * @return The current value of Vitesse
-         */
         int GetVitesse() { return VitesseMoy; }
+        int GetDirection() { return mDirecttion; }
 
     protected:
 
@@ -48,6 +46,7 @@ class SrEncodeur
         int mPositionCm; //!< Variable "PositionCm"
         int mVitesseMoy; //!< Variable "VitesseMoy" Vitesse Moyenne
         int mVitesseArray[SAMPLEVITESSE]; //!< Variable "VitesseArray" Vitesses pour la moyenne
+        int mDirecttion;
 };
 
 #endif // SRENCODEUR_H
