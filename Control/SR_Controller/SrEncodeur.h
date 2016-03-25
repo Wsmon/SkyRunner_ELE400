@@ -34,9 +34,9 @@ class SrEncodeur
          */
         void Update();
 
-        int GetPositionCm() { return PositionCm; }
-        int GetVitesse() { return VitesseMoy; }
-        int GetDirection() { return mDirecttion; }
+        int GetPositionCm() const { return PositionCm; }
+        int GetVitesse() const { return VitesseMoy; }
+        int GetDirection() const { return mDirecttion; }
 
     protected:
 

@@ -18,11 +18,14 @@
 #include "SrEncodeur.h"
 #include "SrThermistance.h"
 #include "PidController.h"
+#include "Sabertooth.h"
 
 #define MAX_POSITION_LV_4 400 //En cm
 #define MAX_POSITION_LV_3 300 //En cm
 #define MAX_POSITION_LV_2 200 //En cm
 #define MAX_POSITION_LV_1 100 //En cm
+
+#define SYREN_DRIVE_ADRESSE 127
 
 
 /**
@@ -42,8 +45,6 @@ class BrainControl
 private:
     //Mettre dans le .h des default config, un enum pour chaque possibilité d'erreur
 
-	int mPositionChariotActuel;
-	int mPositionChariotVoulu;
 	int mPositionActuel; //Position du chariot sur le cable (cm)
 	int mPositionMax; //Position maximum du point de départ (Longueur de cable) (cm)
 	int mVitesseActuel; // en cm/sec
@@ -52,24 +53,31 @@ private:
 	int mDistanceArriere;//Distance vue par le capteur de distance arriere
 
 
-    //100 = Vitesse Max avant
-    //50  = Vitesse Null
-    //0   = Vitesse Max arriere
+    //127 = Vitesse Max avant
+    //0  = Vitesse Null
+    //-127   = Vitesse Max arriere
 	double mOutputPID;
 
-	//Accel/Decel (0 a 5)
-	int mAcceleration; // 0 = None et 5 = Max
-	int mDecceleration; // 0 = Max et 5 = Min
+	int mAcceleration; // 0 = Max et 5 = Very Slow
 
 	bool arretUrgence;
 
 	PidController PID;
 	SrEncodeur Encodeur;
     Thermistance TempBatterie;
+    Sabertooth SyrenDrive(SYREN_DRIVE_ADRESSE);//127 is Serial address de la drive
 
 public:
     BrainControl();
 
+    /**
+    @fn Update
+    @brief Fait l'update des composante du controller
+
+    Update la rampe d'acceleration, la vitesse de la drive.
+    Gere les safety de position et de capteur
+    Arret d'urgence
+    */
     void Update();
 
     bool SetArretUrgenge();
@@ -79,8 +87,7 @@ public:
 	void SetVitesseVoulu();
 	void SetPositionMax();
 
-	void SetAcceleration();
-	void SetDeceleration();
+	bool SetAcceleration();
 
 	//Getters
 	int GetVitesseVoulu(return mVitesseVoulu);
