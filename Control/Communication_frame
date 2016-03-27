@@ -1,0 +1,185 @@
+/*
+  Xbee1
+  The circuit: 
+  * RX = pin 2 (connecter à TX de XBee)
+  * TX = pin 3 (connecter à RX de XBee)
+*/
+
+#include <SoftwareSerial.h>
+
+
+SoftwareSerial xbee(2, 3); // RX, TX
+char msg[10] = {0,0,0,0,0,0,0,0,0,0};
+int NbBit = 0;
+int Connexion = 0;
+int ManetteAdresse = 0;
+int Vitesse = 0;
+int ArretUrgence = 0;
+int Acceleration = 0;
+int Deceleration = 0;
+int LongueurCable[2] = {0,0};
+
+
+
+void setup()  {
+   Serial.begin(115200);
+}
+
+void loop() {
+// Si Xbee a recu quelque
+
+// Trame de demande de connexion: SOF = CXN
+// msg[4] = tableau 1*4
+// msg[0] = SOF[0]
+// msg[1] = SOF[1]
+// msg[2] = SOF[2]
+// msg[3] = Adresse de la manette
+// msg[4] = Checksum
+
+while (Serial.available() > 0 && Connexion == 0 ) { 
+  msg[NbBit]=Serial.read();
+  
+  // Trame de demande de connexion 
+  if (NbBit==0){
+    if (msg[0]== 'C'){                                                             // si la première lettre = C
+      NbBit++;                                                                     // si oui, continuer
+    }
+    else{                                                                          // si non, recommencer
+      NbBit=0;
+      for (int i = 0; i = sizeof(msg); i++)                                        // effacer le tableau
+        msg[i] = (char) 0;   
+    }
+  }
+  if (NbBit==1){
+    if (msg[1]== 'X'){                                                             // si la deuxième lettre = X
+      NbBit++;                                                                     // si oui, continuer
+    }
+    else{                                                                          // si non, recommencer
+      NbBit=0;
+      for (int i = 0; i = sizeof(msg); i++)                                        // effacer le tableau
+        msg[i] = (char) 0;   
+    }
+  }
+  if (NbBit==2){
+    if (msg[2]== 'N'){                                                             // si la troisième lettre = N
+      NbBit++;                                                                     // si oui, continuer
+    }
+    else{                                                                          // si non, recommencer
+      NbBit=0;
+      for (int i = 0; i = sizeof(msg); i++)                                        // effacer le tableau
+        msg[i] = (char) 0;
+    }
+  }
+  if (NbBit==3){
+    NbBit++;
+  }
+  if (NbBit==4){
+    if (msg[4] == '4'){                                                            // si le contrôle a reçu toute la trame
+      Connexion = 1;                                                               // si oui, connecter
+      ManetteAdresse = msg[3];
+    }
+  NbBit=0;
+  for (int i = 0; i = sizeof(msg); i++)                                            // effacer le tableau
+    msg[i] = (char) 0;
+  }  
+}
+
+while (Serial.available() > 0 && Connexion == 1 ) {
+  msg[NbBit]=Serial.read();
+
+  // Trame de demande de déconnexion
+  if (NbBit==0){
+    if (msg[0]== 'C' || msg[0]== 'D'){                           
+      NbBit++;                                                                     // si oui, continuer
+    }
+    else{                                                                          // si non, recommencer
+      NbBit=0;
+      for (int i = 0; i = sizeof(msg); i++)                                        // effacer le tableau
+        msg[i] = (char) 0;   
+    }
+  }
+  if (NbBit==1){
+    if (msg[0]== 'C' && msg[1]== 'N'){                                           
+      NbBit++;                                                                     // si oui, continuer
+    }
+    else if (msg[0]== 'D' && msg[1]== 'C'){                                                       
+      NbBit++;  
+    }
+    else{
+      NbBit=0;
+      for (int i = 0; i = sizeof(msg); i++)                                        // effacer le tableau
+        msg[i] = (char) 0;
+    }
+  }
+  if (NbBit==2){
+    if (msg[0]== 'C' && msg[1]== 'N' && msg[2]== 'T'){                                           
+      NbBit++;                                                                     // si oui, continuer
+    }
+    else if (msg[0]== 'C' && msg[1]== 'N' && msg[2]== 'F'){                                           
+      NbBit++;                                                                     // si oui, continuer
+    }
+    else if (msg[0]== 'D' && msg[1]== 'C' && msg[2]== 'X'){                                                       
+      NbBit++;  
+    }
+    else{
+      NbBit=0;
+      for (int i = 0; i = sizeof(msg); i++)                                        // effacer le tableau
+        msg[i] = (char) 0;
+    }
+  }
+  if (NbBit==3 && ManetteAdresse == msg[3]){                                       // si la trame est envoyé par la manette qu'on a connectée
+    NbBit++;                                                                       // si oui, continuer
+  }
+  else{                                                                            // si non, recommencer
+    NbBit=0;
+    for (int i = 0; i = sizeof(msg); i++)                                          // effacer le tableau
+      msg[i] = (char) 0;
+  }
+  if (NbBit==4){                                                                   // si le contrôle a reçu toute la trame
+    if (msg[0]== 'D' && msg[1]== 'C' && msg[2]== 'X'){
+      if (msg[4] == '4'){
+        Connexion = 0;                                                             // si oui, connecter
+      }
+    NbBit=0;
+    for (int i = 0; i = sizeof(msg); i++)                                      // effacer le tableau
+      msg[i] = (char) 0;
+    }
+    else{
+      NbBit++;
+    } 
+  }
+  if (NbBit==5){
+    NbBit++;
+  }
+  if (NbBit==6){                                                                   // si le contrôle a reçu toute la trame
+    if (msg[0]== 'C' && msg[1]== 'N' && msg[2]== 'T'){
+      if (msg[6] == '6'){
+        Vitesse = msg[4];
+        ArretUrgence = msg[5];
+      }
+    NbBit = 0;
+    for (int i = 0; i = sizeof(msg); i++)                                          // effacer le tableau
+      msg[i] = (char) 0;  
+    }
+    else{
+      NbBit++;
+    }
+  }
+  if (NbBit==7){
+    NbBit++;
+  }
+  if (NbBit==8){                                                                   // si le contrôle a reçu toute la trame
+    if (msg[0]== 'C' && msg[1]== 'N' && msg[2]== 'F' && msg[8] == '8'){
+      Acceleration = msg[4];
+      Deceleration = msg[5];
+      LongueurCable[0] = msg[6];
+      LongueurCable[1] = msg[7];      
+    }  
+    else{
+      NbBit = 0;
+      for (int i = 0; i = sizeof(msg); i++)                                        // effacer le tableau
+        msg[i] = (char) 0;
+    }
+  }
+}
+}
