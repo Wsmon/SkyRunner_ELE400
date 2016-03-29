@@ -22,7 +22,7 @@ Note: Tester les fonctions avec le arduino
 
 #include "NewPing.h"
 
-
+#include "Arduino.h"
 
 //Pin trigger et echo pour capteur devantvle chassis
 #define C_F_TRIGGER_PIN 1 
