@@ -20,10 +20,15 @@
 #include "PidController.h"
 #include "Sabertooth.h"
 
-#define MAX_POSITION_LV_4 400 //En cm
+#define MAX_POSITION_LV_4 400 //En cm pour la distance ou la position
 #define MAX_POSITION_LV_3 300 //En cm
 #define MAX_POSITION_LV_2 200 //En cm
 #define MAX_POSITION_LV_1 100 //En cm
+
+#define MAX_VITESSE_4 40
+#define MAX_VITESSE_3 30
+#define MAX_VITESSE_2 20
+#define MAX_VITESSE_1 10
 
 #define SYREN_DRIVE_ADRESSE 127
 
@@ -84,8 +89,10 @@ public:
     bool IsArretUrgence(return arretUrgence);
 
 	//Setters
-	void SetVitesseVoulu();
-	void SetPositionMax();
+	void SetVitesseVoulu(int _vitesseVoulu);
+	void SetPositionMax(int _positionMax){mPositionMax = _positionMax}
+}
+
 
 	bool SetAcceleration();
 
@@ -109,9 +116,6 @@ private:
     @return double en mètres
 
     */
-	double CalculPosition(/*directionChariotActuel + directionChariotVoulu*/);
-
-
 }
 
 #endif
