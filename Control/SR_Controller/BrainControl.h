@@ -91,8 +91,6 @@ public:
 	//Setters
 	void SetVitesseVoulu(int _vitesseVoulu);
 	void SetPositionMax(int _positionMax){mPositionMax = _positionMax}
-}
-
 
 	bool SetAcceleration();
 
