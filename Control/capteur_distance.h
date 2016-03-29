@@ -5,6 +5,9 @@
     @file capteur_distance.h
     Description  fonction pour la lecture de distance et définition des configuration des capteurs sur le 
 		chariot 
+		
+		Attention ne pas oublier d'inclure le fichier NewPing.h et NewPing.cpp qui est la library avec les foncitons de base 
+		pour les capteurs
     @author Wsimon
 	
     @version 1.0
